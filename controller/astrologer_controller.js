@@ -13,3 +13,17 @@ module.exports.create = async (req, res)=>{
         })
     }
 }
+
+module.exports.viewData = async(req, res)=>{
+    try {
+        const getAstrologer = await Astrologer.find({}).sort({createAt: -1});
+        return res.status(200).json({
+            message:"all strologer details",
+            Astrologer: getAstrologer
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: "Internal server error in getting the Astrologer"
+        })
+    }
+}
